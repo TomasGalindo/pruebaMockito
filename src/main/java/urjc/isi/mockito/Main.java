@@ -2,28 +2,32 @@ package urjc.isi.mockito;
 
 import static spark.Spark.*;
 
-import spark.Request;
-import spark.Response;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.net.URISyntaxException;
 
 public class Main {
   
-    public static String doWork(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
-	String result = new String("Hello World");
 
-	return result;
+
+  public static String doWork() throws ClassNotFoundException, URISyntaxException {
+    String result = new String("Hola Mundo");
+
+    return result;
     }
 
-    public static void main(String[] args) throws ClassNotFoundException {
+  public static void main(String[] args) throws ClassNotFoundException {
         port(getHerokuAssignedPort());
 
         // spark server
-        get("/hello", Main::doWork);
+        get("/hello", (req, res) -> doWork());
 
-    }
-
-    static int getHerokuAssignedPort() {
+        }
+  static int getHerokuAssignedPort() {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
             return Integer.parseInt(processBuilder.environment().get("PORT"));
