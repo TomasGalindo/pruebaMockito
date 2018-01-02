@@ -24,7 +24,7 @@ public class MockitoTests {
 		assertEquals(10, list.size());
 	}
 
-	/*	@Test
+	@Test
 	public void MockListSizeWithMultipleReturnValues() {
 		List list = mock(List.class);
 		when(list.size()).thenReturn(10).thenReturn(20);
@@ -35,7 +35,7 @@ public class MockitoTests {
 		
 		verify(list, times(3)).size();
 	}
-*/
+
 	@Test
 	public void MockListGet() {
 		List<String> list = mock(List.class);
